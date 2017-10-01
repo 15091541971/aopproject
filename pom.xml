@@ -1,0 +1,221 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>51douding</groupId>
+	<artifactId>ddgj</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>ddgj</name>
+	
+	<url>http://maven.apache.org</url>
+	<properties>
+	 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
+    <maven.compiler.encoding>UTF-8</maven.compiler.encoding>  
+		<commons-lang.verssion>2.6</commons-lang.verssion>
+		<slf4j.version>1.7.6</slf4j.version>
+		<spring.version>4.3.1.RELEASE</spring.version>
+		<mysql.version>5.1.39</mysql.version>
+	</properties>
+	<dependencies>
+	
+	    <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+   <version>${spring.version}</version>
+</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-framework-bom</artifactId>
+			<version>${spring.version}</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>servlet-api</artifactId>
+     <version>2.5</version>
+     <scope>compile</scope>
+     </dependency>
+		
+		
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.7.9</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.11</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.5.4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+		 <groupId>org.aspectj</groupId>
+  <artifactId>aspectjweaver</artifactId>
+ 
+  <version>1.7.2</version>
+		</dependency>
+		<dependency>
+		 <groupId>org.aspectj</groupId>
+  <artifactId>aspectjrt</artifactId>
+  <version>1.7.4</version>
+		</dependency>
+		<dependency>
+
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.unitils</groupId>
+			<artifactId>unitils-core</artifactId>
+			<version>3.4.3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.unitils</groupId>
+			<artifactId>unitils-test</artifactId>
+			<version>3.4.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.unitils</groupId>
+			<artifactId>unitils-spring</artifactId>
+			<version>3.4.3</version>
+			<scope>test</scope>
+			<exclusions>
+			<exclusion>
+			 <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+			</exclusion>
+			<!-- <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+    <version>4.3.1.RELEASE</version>
+</dependency> -->
+			
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.unitils</groupId>
+			<artifactId>unitils-orm</artifactId>
+			<version>3.4.3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.unitils</groupId>
+			<artifactId>unitils-testng</artifactId>
+			<version>3.4.3</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>ddgj</finalName>
+		<plugins>
+		 <plugin>  
+            <groupId>org.apache.maven.plugins</groupId>  
+            <artifactId>maven-compiler-plugin</artifactId>  
+            <configuration>  
+                <source>1.7</source>  
+                <target>1.7</target>  
+            </configuration>  
+        </plugin>  
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.2.2.v20140723</version>
+
+				<configuration>
+				
+					<webApp>
+					
+						<containerIncludeJarPattern>
+							.*/javax.servlet-[^/]*\.jar$|.*/servlet-api-[^/]*\.jar$|.*javax.servlet.jsp.jstl-[^/]*\.jar|.*taglibs-standard-impl-.*\.jar
+						</containerIncludeJarPattern>
+						<webInfIncludeJarPattern>.*/classes/.*</webInfIncludeJarPattern>
+					</webApp>
+				</configuration>
+
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+
+				<configuration>
+					<packagingExcludes>WEB-INF/web.xml</packagingExcludes>
+					<!--  <overlays>
+						<overlay>
+							<groupId>com.51douding</groupId>
+							<artifactId>think1</artifactId>
+						</overlay>
+						
+					</overlays>  -->
+
+					<version>3.1</version>
+				</configuration>
+			</plugin>
+		
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<version>1.4.9</version>
+				<configuration>
+					<container>
+						<containerId>tomcat7x</containerId>
+						<home>D:\apache-tomcat-7.0.72</home>
+					</container>
+					<configuration>
+						<type>existing</type>
+						<home>D:\apache-tomcat-7.0.72</home>
+						<properties>
+							<!-- 更改监听端口 -->
+							<cargo.servlet.port>8888</cargo.servlet.port>
+						</properties>
+					</configuration>
+				</configuration>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+	</build>
+</project>
